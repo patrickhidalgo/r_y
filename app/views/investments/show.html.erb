@@ -1,47 +1,67 @@
 <div class="page-header">
-  <%= link_to investments_path, :class => 'btn btn-default' do %>
-    <span class="glyphicon glyphicon-list-alt"></span>
-    Back
+  <% if current_user %>
+    <% if can? :has_money, @investment %>
+      <%= link_to my_investments_path, :class => 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        Back
+      <% end %>
+    <% else %>
+      <%= link_to investments_path, :class => 'btn btn-default' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        Back
+      <% end %>
+    <% end %>
   <% end %>
-  <%= link_to edit_investment_path(@investment), :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Edit
+  <% if current_user %>
+    <% if can? :update, @investment %>
+      <%= link_to edit_investment_path(@investment), :class => 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit
+      <% end %>
+    <% end %>
   <% end %>
-  <h1>Show investment</h1>
+  <h1>RENYD <%= @investment.issue_date.strftime('%Y') %>-1/
+    <%= @investment.term %> </h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Term:</dt>
-  <dd><%= @investment.term %></dd>
+<p>
+  <strong>RENYD <%= @investment.issue_date.strftime('%Y') %>-1/
+    <%= @investment.term %> are unsecured bonds issued by Renewable
+    Yield. The bonds have a <%= @investment.term %> year term with
+    a <%= number_to_percentage(@investment.interest_rate, precision: 2) %>
+    interest rate. The bonds will mature on
+    <%= @investment.maturity_date.strftime('%B %-d, %Y') %> which is
+    <%= @investment.term %> years after their offer date of
+    <%= @investment.issue_date.strftime('%B %-d, %Y') %>.
+  </strong>
+</p>
 
-  <dt>Interest rate:</dt>
-  <dd><%= @investment.interest_rate %></dd>
+<p>
+  <strong>The bonds were issued with an original outstanding amount of
+    <%= number_to_currency(@investment.original_issue, precision: 2) %>
+    and have a current outstanding amount of
+    <%= number_to_currency(@investment.current_outstanding, precision: 2) %>.
+    The minimum order is <%= number_to_currency(@investment.minimum_order, precision: 2) %>
+    and increments are <%= number_to_currency(@investment.denomination, precision: 2) %>.
+  </strong>
+</p>
 
-  <dt>Original issue:</dt>
-  <dd><%= @investment.original_issue %></dd>
-
-  <dt>Current outstanding:</dt>
-  <dd><%= @investment.current_outstanding %></dd>
-
-  <dt>Minimum order:</dt>
-  <dd><%= @investment.minimum_order %></dd>
-
-  <dt>Denomination:</dt>
-  <dd><%= @investment.denomination %></dd>
-
-  <dt>Maturity date:</dt>
-  <dd><%= @investment.maturity_date %></dd>
-
-  <dt>Issue date:</dt>
-  <dd><%= @investment.issue_date %></dd>
-
-  <dt>Offer start period:</dt>
-  <dd><%= @investment.offer_start_period %></dd>
-
-  <dt>Offer end period:</dt>
-  <dd><%= @investment.offer_end_period %></dd>
-
-  <dt>User:</dt>
-  <dd><%= @investment.user %></dd>
-
-</dl>
+<p>
+  <strong>The offering period for this bond started on
+    <%= @investment.offer_start_period.strftime('%B %-d, %Y') %> and will end on
+    <%= @investment.offer_end_period.strftime('%B %-d, %Y') %>.
+  </strong>
+</p>
+<% if current_user %>
+  <% if can? :has_money, @investment %>
+    <% if current_user.investments.include?(@investment) %>
+      <%= "If you need to divest, click" %>
+      <%= link_to 'Divest', divest_investment_path(@investment) %>
+      <br>
+    <% else %>
+      <%= "If you want to invest, click" %>
+      <%= link_to 'Invest', invest_investment_path(@investment) %>
+      <br>
+    <% end %>
+  <% end %>
+<% end %>
