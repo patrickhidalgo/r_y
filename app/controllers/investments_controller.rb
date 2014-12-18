@@ -1,34 +1,47 @@
 class InvestmentsController < ApplicationController
-  before_action :set_investment, only: [:show, :edit, :update, :destroy]
+  include ActionView::Helpers::NumberHelper
 
-  # GET /investments
-  # GET /investments.json
-  def index
-    @investments = Investment.all
+  load_and_authorize_resource
+  before_action :set_investment, only: [:show, :edit, :update, :destroy, :invest, :divest]
+
+  def invest
+    if current_user
+      current_user.investments << @investment
+      redirect_to investments_path, notice: "#{@investment.term} Year #{number_to_percentage(@investment.interest_rate, precision: 2)}  has been moved to your inventory."
+    end
   end
 
-  # GET /investments/1
-  # GET /investments/1.json
+  def divest
+    @investment.user = nil
+    @investment.save
+    redirect_to my_investments_path, notice: "#{@investment.term} #{@investment.interest_rate} has been sold!."
+  end
+
+  def index
+    @investments = Investment.where(user_id: nil).paginate(page: params[:page], per_page: 20)
+  end
+
+  def my_investments
+    @investments = Investment.where(user_id: current_user.id).paginate(page: params[:page], per_page: 20)
+    render 'investments/index'
+  end
+
   def show
   end
 
-  # GET /investments/new
   def new
     @investment = Investment.new
   end
 
-  # GET /investments/1/edit
   def edit
   end
 
-  # POST /investments
-  # POST /investments.json
   def create
     @investment = Investment.new(investment_params)
-
+    creation_message = "#{@investment.term} year #{@investment.interest_rate}% rate was successfully created."
     respond_to do |format|
       if @investment.save
-        format.html { redirect_to @investment, notice: 'Investment was successfully created.' }
+        format.html { redirect_to @investment, notice: creation_message }
         format.json { render :show, status: :created, location: @investment }
       else
         format.html { render :new }
@@ -41,8 +54,10 @@ class InvestmentsController < ApplicationController
   # PATCH/PUT /investments/1.json
   def update
     respond_to do |format|
+      update_message = "#{@investment.term} year #{@investment.interest_rate}% rate was successfully updated."
+
       if @investment.update(investment_params)
-        format.html { redirect_to @investment, notice: 'Investment was successfully updated.' }
+        format.html { redirect_to @investment, notice: update_message }
         format.json { render :show, status: :ok, location: @investment }
       else
         format.html { render :edit }
@@ -54,21 +69,25 @@ class InvestmentsController < ApplicationController
   # DELETE /investments/1
   # DELETE /investments/1.json
   def destroy
+    destroy_message = "#{@investment.term} year #{@investment.interest_rate} was successfully destroyed."
+
     @investment.destroy
     respond_to do |format|
-      format.html { redirect_to investments_url, notice: 'Investment was successfully destroyed.' }
+      format.html { redirect_to investments_path, notice: destroy_message }
       format.json { head :no_content }
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_investment
-      @investment = Investment.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def investment_params
-      params.require(:investment).permit(:term, :interest_rate, :original_issue, :current_outstanding, :minimum_order, :denomination, :maturity_date, :issue_date, :offer_start_period, :offer_end_period, :user_id)
-    end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_investment
+    @investment = Investment.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def investment_params
+    params.require(:investment).permit(:term, :interest_rate, :minimum_order, :denomination, :maturity_date, :issue_date, :offer_start_period, :offer_end_period)
+  end
 end

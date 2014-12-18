@@ -3,9 +3,22 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Investment
   <% end %>
-  <h1>Listing investments</h1>
+  <h2>GET INVESTED!</h2>
 </div>
+<%= image_tag("wateringplant.jpg", size: "618x343", :alt => "rss feed") %>
+<% if current_user.investor? || current_user.admin? || current_user.manager? %>
 
+<% else %>
+  <h4>Renewable Yield loans money to small residential solar
+    providers to fund their projects and then takes those loans
+    and breaks the cash flow into various tranches differentiated
+    by term and interest rate.</h4>
+  <h4>
+    Investors will be receive a diversified pro rata cash flow
+    share of all of the loans outstanding at the time of issue
+    rather than the cash flow of just one particular solar project.
+  </h4>
+<% end %>
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -14,13 +27,8 @@
             <th>Interest rate</th>
             <th>Original issue</th>
             <th>Current outstanding</th>
-            <th>Minimum order</th>
-            <th>Denomination</th>
             <th>Maturity date</th>
-            <th>Issue date</th>
-            <th>Offer start period</th>
             <th>Offer end period</th>
-            <th>User</th>
             <th></th>
         <th></th>
         <th></th>
@@ -33,13 +41,8 @@
             <td><%= investment.interest_rate %></td>
             <td><%= investment.original_issue %></td>
             <td><%= investment.current_outstanding %></td>
-            <td><%= investment.minimum_order %></td>
-            <td><%= investment.denomination %></td>
             <td><%= investment.maturity_date %></td>
-            <td><%= investment.issue_date %></td>
-            <td><%= investment.offer_start_period %></td>
             <td><%= investment.offer_end_period %></td>
-            <td><%= investment.user %></td>
             <td><%= link_to 'Show', investment %></td>
         <td><%= link_to 'Edit', edit_investment_path(investment) %></td>
         <td><%= link_to 'Destroy', investment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
