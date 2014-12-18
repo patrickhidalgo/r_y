@@ -1,10 +1,37 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  default_url_options host: 'localhost', port: 3000
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
+  resources :projects do
+    member do
+      get 'submit' => 'projects#submit'
+      get 'withdraw' => 'projects#withdraw'
+    end
+  end
+
+  resources :users,
+    only: [:new, :create],
+    path_names: { new: "signup"}
+
+  get 'my_investments' => 'investments#my_investments'
+  get 'my_projects' => 'projects#my_projects'
+  get 'verification/:token', to: 'users#verify', as: 'verify_email'
+
+  resources :investments do
+    member do
+      get 'invest' => 'investments#invest'
+      get 'divest' => 'investments#divest'
+    end
+  end
+
+  root 'welcome#index'
+  get 'about' => 'about#index'
+  get 'login' => 'sessions#login'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+  get 'business_canvas' => 'about#business_canvas'
+  get 'team' => 'about#team'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

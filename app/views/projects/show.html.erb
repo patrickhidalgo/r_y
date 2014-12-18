@@ -1,0 +1,92 @@
+<div class="page-header">
+  <%= link_to projects_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_project_path(@project), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show project</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Format:</dt>
+  <dd><%= @project.format %></dd>
+
+  <dt>Api key:</dt>
+  <dd><%= @project.api_key %></dd>
+
+  <dt>System capacity:</dt>
+  <dd><%= @project.system_capacity %></dd>
+
+  <dt>Module type:</dt>
+  <dd><%= @project.module_type %></dd>
+
+  <dt>Losses:</dt>
+  <dd><%= @project.losses %></dd>
+
+  <dt>Array type:</dt>
+  <dd><%= @project.array_type %></dd>
+
+  <dt>Tilt:</dt>
+  <dd><%= @project.tilt %></dd>
+
+  <dt>Azimuth:</dt>
+  <dd><%= @project.azimuth %></dd>
+
+  <dt>Address:</dt>
+  <dd><%= @project.address %></dd>
+
+  <dt>Lat:</dt>
+  <dd><%= @project.lat %></dd>
+
+  <dt>Lon:</dt>
+  <dd><%= @project.lon %></dd>
+
+  <dt>File:</dt>
+  <dd><%= @project.file_id %></dd>
+
+  <dt>Dataset:</dt>
+  <dd><%= @project.dataset %></dd>
+
+  <dt>Radius:</dt>
+  <dd><%= @project.radius %></dd>
+
+  <dt>Timeframe:</dt>
+  <dd><%= @project.timeframe %></dd>
+
+  <dt>Dc ac ratio:</dt>
+  <dd><%= @project.dc_ac_ratio %></dd>
+
+  <dt>Gcr:</dt>
+  <dd><%= @project.gcr %></dd>
+
+  <dt>Inv eff:</dt>
+  <dd><%= @project.inv_eff %></dd>
+
+  <dt>Callback:</dt>
+  <dd><%= @project.callback %></dd>
+
+  <dt>Ac annual:</dt>
+  <dd><%= @project.ac_annual %></dd>
+
+  <dt>Solrad annual:</dt>
+  <dd><%= @project.solrad_annual %></dd>
+
+  <dt>Npv:</dt>
+  <dd><%= @project.npv %></dd>
+
+  <dt>Irr:</dt>
+  <dd><%= @project.irr %></dd>
+
+  <dt>Project score:</dt>
+  <dd><%= @project.project_score %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @project.status %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @project.user %></dd>
+
+</dl>

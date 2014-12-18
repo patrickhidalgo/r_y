@@ -1,0 +1,59 @@
+<div class="page-header">
+  <%= link_to users_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_user_path(@user), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show user</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Company name:</dt>
+  <dd><%= @user.company_name %></dd>
+
+  <dt>First name:</dt>
+  <dd><%= @user.first_name %></dd>
+
+  <dt>Middle name:</dt>
+  <dd><%= @user.middle_name %></dd>
+
+  <dt>Last name:</dt>
+  <dd><%= @user.last_name %></dd>
+
+  <dt>Phone number:</dt>
+  <dd><%= @user.phone_number %></dd>
+
+  <dt>Street address:</dt>
+  <dd><%= @user.street_address %></dd>
+
+  <dt>City:</dt>
+  <dd><%= @user.city %></dd>
+
+  <dt>State:</dt>
+  <dd><%= @user.state %></dd>
+
+  <dt>Zip:</dt>
+  <dd><%= @user.zip %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= @user.email %></dd>
+
+  <dt>Ssn:</dt>
+  <dd><%= @user.ssn %></dd>
+
+  <dt>Password digest:</dt>
+  <dd><%= @user.password_digest %></dd>
+
+  <dt>Role:</dt>
+  <dd><%= @user.role %></dd>
+
+  <dt>Verified email:</dt>
+  <dd><%= @user.verified_email %></dd>
+
+  <dt>Token:</dt>
+  <dd><%= @user.token %></dd>
+
+</dl>

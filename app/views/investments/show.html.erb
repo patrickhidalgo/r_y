@@ -1,0 +1,47 @@
+<div class="page-header">
+  <%= link_to investments_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_investment_path(@investment), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show investment</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Term:</dt>
+  <dd><%= @investment.term %></dd>
+
+  <dt>Interest rate:</dt>
+  <dd><%= @investment.interest_rate %></dd>
+
+  <dt>Original issue:</dt>
+  <dd><%= @investment.original_issue %></dd>
+
+  <dt>Current outstanding:</dt>
+  <dd><%= @investment.current_outstanding %></dd>
+
+  <dt>Minimum order:</dt>
+  <dd><%= @investment.minimum_order %></dd>
+
+  <dt>Denomination:</dt>
+  <dd><%= @investment.denomination %></dd>
+
+  <dt>Maturity date:</dt>
+  <dd><%= @investment.maturity_date %></dd>
+
+  <dt>Issue date:</dt>
+  <dd><%= @investment.issue_date %></dd>
+
+  <dt>Offer start period:</dt>
+  <dd><%= @investment.offer_start_period %></dd>
+
+  <dt>Offer end period:</dt>
+  <dd><%= @investment.offer_end_period %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @investment.user %></dd>
+
+</dl>
