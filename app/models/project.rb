@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
       user_id = 11 + (number/10)
       Project.create(
         :format => ['json', 'xml'].sample,
-        :api_key => Faker::Internet.password,
+        :api_key => 'mOwXKaie0UZB8tihBfZj5b2YpYkETjc33Yl5J1EM',
         :system_capacity => rand(1..10),
         :module_type => rand(0..2),
         :losses => rand(-5..99),

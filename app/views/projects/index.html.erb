@@ -8,7 +8,8 @@
   <h1>GET FUNDED!</h1>
   <%= image_tag("solar_panels.jpg", size: "618x343", :alt => "rss feed") %>
 </div>
-<h2>We have funded <%= @projects_count %> projects for a total of <%= @projects_value %> to date.</h2>
+<h3>We have funded <%= @projects_count %> projects for a total of <%= @projects_value %> to date.
+  </h3>
 <% if current_user.provider? || current_user.admin? || current_user.manager? %>
   <%= render 'provider' %>
 <% else %>

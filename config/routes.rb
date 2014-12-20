@@ -9,9 +9,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users,
-    only: [:new, :create],
-    path_names: { new: "signup"}
+  resources :users
+
 
   get 'my_investments' => 'investments#my_investments'
   get 'my_projects' => 'projects#my_projects'
