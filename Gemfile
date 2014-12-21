@@ -13,7 +13,7 @@ gem 'bootstrap-generators'
 
 group :test, :darwin, :development do
   gem 'byebug'
-  gem 'ruby_gntp'
+  # gem 'ruby_gntp'
   gem 'faker'
   gem 'rspec-collection_matchers'
 end

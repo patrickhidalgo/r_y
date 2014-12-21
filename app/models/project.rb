@@ -1,5 +1,12 @@
 class Project < ActiveRecord::Base
+  # in irb
+  # require 'json'
+  # require 'open-uri'
   # request = open('http://developer.nrel.gov/api/pvwatts/v5.json?api_key=mOwXKaie0UZB8tihBfZj5b2YpYkETjc33Yl5J1EM&lat=40&lon=-105&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10')
+  # response = JSON.parse(request.read)
+  # response['outputs']['ac_annual']
+  # response['outputs']['solrad_annual']
+
   belongs_to :user
   # has_one :nrel_data
 
