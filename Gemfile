@@ -10,11 +10,12 @@ gem 'guard'
 gem 'jquery-ui-rails'
 gem 'cancancan'
 gem 'bootstrap-generators'
+gem 'faker'
 
 group :test, :darwin, :development do
   gem 'byebug'
   # gem 'ruby_gntp'
-  gem 'faker'
+
   gem 'rspec-collection_matchers'
 end
 
